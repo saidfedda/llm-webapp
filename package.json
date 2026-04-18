@@ -1,15 +1,11 @@
 {
-  "name": "groq-ai-assistant",
+  "name": "ai-assistant",
   "version": "1.0.0",
-  "description": "مساعد ذكي يعمل بـ Groq API",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
     "express": "^4.18.2"
-  },
-  "keywords": ["ai", "groq", "chatbot", "arabic"],
-  "author": "Your Name",
-  "license": "MIT"
+  }
 }
