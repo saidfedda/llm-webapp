@@ -2,7 +2,7 @@
 // إعدادات API - Groq Cloud
 // ========================================
 const API_KEY = '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';
-const API_URL = 'https://api.groq.com/openai/v1/chat/completions';
+const API_URL = 'org_01kpg0hzh4ez9s2ccwx3jb7cvb';
 const MODEL = 'mixtral-8x7b-32768';
 
 // عناصر الصفحة
