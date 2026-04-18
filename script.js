@@ -7,7 +7,7 @@ const API_KEY = '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';  // 
 const API_URL = 'https://api.groq.com/openai/v1/chat/completions';
 
 // 🤖 اسم النموذج - اختر واحد من الجدول تحت
-const MODEL = 'llama3-70b-8192';  // الأقوى حالياً
+const MODEL = 'llama-3.3-70b-versatile';  // الأقوى حالياً
 
 // ========================================
 // النماذج المتاحة (انسخ الاسم واستخدمه)
