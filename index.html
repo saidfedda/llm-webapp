@@ -3,16 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🤖 المساعد الذكي</title>
+    <title>🤖 مساعد AI - نموذجين</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>🧠 المساعد الذكي</h1>
+            <div class="model-selector">
+                <label>اختر النموذج:</label>
+                <select id="modelSelect">
+                    <option value="llama-3.3-70b-versatile">🚀 قوي (Llama 70B) - دقة عالية</option>
+                    <option value="llama-3.1-8b-instant">⚡ سريع (Llama 8B) - سرعة فائقة</option>
+                </select>
+            </div>
             <div class="api-info">
                 <span class="api-badge">⚡ Groq API</span>
-                <span class="model-badge">Llama 3 70B</span>
+                <span class="model-badge" id="currentModelBadge">Llama 70B</span>
             </div>
         </div>
 
@@ -20,8 +27,9 @@
             <div class="message bot">
                 <div class="message-content">
                     👋 مرحباً! أنا مساعد ذكي<br>
-                    🚀 أستخدم نموذج <strong>Llama 3 70B</strong><br>
-                    ✅ اسأل بالعربية أو الإنجليزية<br>
+                    ✅ اختر النموذج المناسب من الأعلى<br>
+                    🚀 <strong>القوي</strong> للإجابات المفصلة<br>
+                    ⚡ <strong>السريع</strong> للمحادثات العادية<br>
                     💬 ماذا تريد أن تسأل؟
                 </div>
             </div>
@@ -30,6 +38,10 @@
         <div class="input-area">
             <input type="text" id="userInput" placeholder="اكتب سؤالك هنا...">
             <button id="sendBtn">📤 إرسال</button>
+        </div>
+        
+        <div class="footer">
+            <span id="responseTime">⚡ جاهز</span>
         </div>
     </div>
     <script src="script.js"></script>
