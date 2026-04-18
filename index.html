@@ -3,45 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🤖 مساعد AI - نموذجين</title>
+    <title>🤖 Llama AI - نموذجين</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>🧠 المساعد الذكي</h1>
-            <div class="model-selector">
-                <label>اختر النموذج:</label>
-                <select id="modelSelect">
-                    <option value="llama-3.3-70b-versatile">🚀 قوي (Llama 70B) - دقة عالية</option>
-                    <option value="llama-3.1-8b-instant">⚡ سريع (Llama 8B) - سرعة فائقة</option>
-                </select>
+        <div class="sidebar">
+            <div class="logo">
+                <span>🧠</span>
+                <h2>Llama<span>AI</span></h2>
             </div>
-            <div class="api-info">
-                <span class="api-badge">⚡ Groq API</span>
-                <span class="model-badge" id="currentModelBadge">Llama 70B</span>
-            </div>
-        </div>
-
-        <div class="chat-box" id="chatBox">
-            <div class="message bot">
-                <div class="message-content">
-                    👋 مرحباً! أنا مساعد ذكي<br>
-                    ✅ اختر النموذج المناسب من الأعلى<br>
-                    🚀 <strong>القوي</strong> للإجابات المفصلة<br>
-                    ⚡ <strong>السريع</strong> للمحادثات العادية<br>
-                    💬 ماذا تريد أن تسأل؟
+            
+            <div class="model-box">
+                <p>🎯 اختيار النموذج</p>
+                <div class="model-option" data-model="llama-3.3-70b-versatile">
+                    <span>🚀</span>
+                    <div>
+                        <strong>Llama 3.3 70B</strong>
+                        <small>قوي ودقيق</small>
+                    </div>
+                </div>
+                <div class="model-option" data-model="llama-3.1-8b-instant">
+                    <span>⚡</span>
+                    <div>
+                        <strong>Llama 3.1 8B</strong>
+                        <small>سريع جداً</small>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div class="input-area">
-            <input type="text" id="userInput" placeholder="اكتب سؤالك هنا...">
-            <button id="sendBtn">📤 إرسال</button>
+            
+            <div class="current">
+                <span>🟢 النموذج الحالي:</span>
+                <strong id="currentModel">Llama 70B</strong>
+            </div>
+            
+            <button id="clearChat">🗑️ مسح المحادثة</button>
         </div>
         
-        <div class="footer">
-            <span id="responseTime">⚡ جاهز</span>
+        <div class="chat-area">
+            <div class="chat-header">
+                <span>⚡ Groq Cloud</span>
+                <span id="responseSpeed">جاهز</span>
+            </div>
+            
+            <div class="chat-messages" id="chatMessages">
+                <div class="welcome">
+                    ✨ مرحباً! اختر النموذج وابدأ السؤال
+                </div>
+            </div>
+            
+            <div class="input-area">
+                <textarea id="userInput" placeholder="اكتب سؤالك..."></textarea>
+                <button id="sendBtn">إرسال</button>
+            </div>
         </div>
     </div>
     <script src="script.js"></script>
