@@ -3,18 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مساعد AI</title>
+    <title>🤖 ذكاء اصطناعي - Groq AI</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>🤖 المساعد الذكي</h1>
-        <div class="chat-box" id="chatBox">
-            <div class="message bot">مرحباً! اسألني أي شيء</div>
+        <div class="header">
+            <h1>🧠 المساعد الذكي</h1>
+            <div class="api-info">
+                <span class="api-badge">⚡ Groq API</span>
+                <span class="model-badge">Mixtral-8x7B</span>
+            </div>
         </div>
+
+        <div class="chat-box" id="chatBox">
+            <div class="message bot">
+                <div class="message-content">
+                    👋 مرحباً! أنا مساعد ذكي يعمل بتقنية <strong>Groq API</strong><br>
+                    أستخدم نموذج <strong>Mixtral-8x7B-32768</strong><br><br>
+                    ✅ أسأل بالعربية أو الإنجليزية<br>
+                    ✅ ردود سريعة جداً<br>
+                    ✅ مجاني بالكامل<br><br>
+                    💬 ماذا تريد أن تسأل اليوم؟
+                </div>
+            </div>
+        </div>
+
         <div class="input-area">
-            <input type="text" id="userInput" placeholder="اكتب سؤالك...">
-            <button id="sendBtn">إرسال</button>
+            <input type="text" id="userInput" placeholder="اكتب سؤالك هنا...">
+            <button id="sendBtn">
+                <span>📤</span> إرسال
+            </button>
+        </div>
+        
+        <div class="footer">
+            <span>🔒 آمن | 🚀 مدعوم بـ Groq Cloud | 💰 مجاني</span>
         </div>
     </div>
     <script src="script.js"></script>
