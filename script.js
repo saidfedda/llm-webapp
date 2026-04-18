@@ -1,29 +1,37 @@
 // ========================================
-// إعدادات API - Groq Cloud
+// 🔑 هنا تضع مفتاح API الخاص بك
 // ========================================
-const API_KEY = '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';
-const API_URL = 'org_01kpg0hzh4ez9s2ccwx3jb7cvb';
-const MODEL = 'llama3-70b-8192';
+const API_KEY = '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';  // غير هذا بالمفتاح الحقيقي
 
-// عناصر الصفحة
+// 🌐 رابط API - هذا هو الرابط الصحيح لا تغيره
+const API_URL = 'https://api.groq.com/openai/v1/chat/completions';
+
+// 🤖 اسم النموذج - اختر واحد من الجدول تحت
+const MODEL = 'llama3-70b-8192';  // الأقوى حالياً
+
+// ========================================
+// النماذج المتاحة (انسخ الاسم واستخدمه)
+// ========================================
+// llama3-70b-8192      ← الأقوى، يدعم العربية
+// llama3-8b-8192       ← أسرع لكن أقل دقة
+// gemma2-9b-it         ← من Google، جيد
+// mixtral-8x7b-32768   ← تم إيقافه ❌ لا تستخدمه
+
+// ========================================
+// الكود الرئيسي (لا تغيره)
+// ========================================
 const chatBox = document.getElementById('chatBox');
 const userInput = document.getElementById('userInput');
 const sendBtn = document.getElementById('sendBtn');
 
-// ========================================
-// إرسال الرسالة
-// ========================================
 async function sendMessage() {
     const message = userInput.value.trim();
     if (!message) return;
 
-    // إضافة رسالة المستخدم
     addMessage(message, 'user');
     userInput.value = '';
-    userInput.focus();
 
-    // إظهار مؤشر الكتابة
-    const typingIndicator = showTypingIndicator();
+    const typing = showTyping();
 
     try {
         const response = await fetch(API_URL, {
@@ -35,84 +43,47 @@ async function sendMessage() {
             body: JSON.stringify({
                 model: MODEL,
                 messages: [
-                    { 
-                        role: 'system', 
-                        content: 'أنت مساعد ذكي ومفيد. أجب باللغة التي يسألك بها المستخدم (عربية أو إنجليزية). كن دقيقاً ومختصراً.'
-                    },
-                    { 
-                        role: 'user', 
-                        content: message 
-                    }
+                    { role: 'system', content: 'أنت مساعد ذكي. أجب باللغة التي يسألك بها المستخدم.' },
+                    { role: 'user', content: message }
                 ],
-                temperature: 0.7,
-                max_tokens: 1000
+                temperature: 0.7
             })
         });
 
         if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.error?.message || 'فشل في الاتصال');
+            const error = await response.text();
+            throw new Error(`خطأ ${response.status}: ${error.substring(0, 100)}`);
         }
 
         const data = await response.json();
         const reply = data.choices[0].message.content;
         
-        // إزالة مؤشر الكتابة وإضافة الرد
-        typingIndicator.remove();
+        typing.remove();
         addMessage(reply, 'bot');
-
+        
     } catch (error) {
-        typingIndicator.remove();
-        addMessage(`❌ عذراً! ${error.message}`, 'bot');
-        console.error('Error:', error);
+        typing.remove();
+        addMessage(`❌ خطأ: ${error.message}`, 'bot');
+        console.error(error);
     }
 }
 
-// ========================================
-// عرض الرسالة في واجهة الدردشة
-// ========================================
 function addMessage(text, sender) {
-    const messageDiv = document.createElement('div');
-    messageDiv.classList.add('message', sender);
-    
-    const contentDiv = document.createElement('div');
-    contentDiv.classList.add('message-content');
-    contentDiv.innerHTML = text.replace(/\n/g, '<br>');
-    
-    messageDiv.appendChild(contentDiv);
-    chatBox.appendChild(messageDiv);
-    
-    // التمرير للأسفل
+    const div = document.createElement('div');
+    div.className = `message ${sender}`;
+    div.innerHTML = `<div class="message-content">${text.replace(/\n/g, '<br>')}</div>`;
+    chatBox.appendChild(div);
     chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-// ========================================
-// مؤشر الكتابة المتحرك
-// ========================================
-function showTypingIndicator() {
-    const indicatorDiv = document.createElement('div');
-    indicatorDiv.classList.add('message', 'bot');
-    
-    const typingDiv = document.createElement('div');
-    typingDiv.classList.add('typing');
-    typingDiv.innerHTML = '<span></span><span></span><span></span>';
-    
-    indicatorDiv.appendChild(typingDiv);
-    chatBox.appendChild(indicatorDiv);
+function showTyping() {
+    const div = document.createElement('div');
+    div.className = 'message bot';
+    div.innerHTML = '<div class="typing"><span></span><span></span><span></span></div>';
+    chatBox.appendChild(div);
     chatBox.scrollTop = chatBox.scrollHeight;
-    
-    return indicatorDiv;
+    return div;
 }
 
-// ========================================
-// الأحداث (Event Listeners)
-// ========================================
-sendBtn.addEventListener('click', sendMessage);
-userInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        sendMessage();
-    }
-});
-
-// رسالة ترحيب إضافية بعد التحميل
-console.log('✅ التطبيق جاهز | Groq API | Model: ' + MODEL);
+sendBtn.onclick = sendMessage;
+userInput.onkeypress = (e) => { if (e.key === 'Enter') sendMessage(); };
