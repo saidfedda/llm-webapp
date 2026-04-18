@@ -3,7 +3,7 @@
 // ========================================
 const API_KEY = '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';
 const API_URL = 'org_01kpg0hzh4ez9s2ccwx3jb7cvb';
-const MODEL = 'mixtral-8x7b-32768';
+const MODEL = 'llama3-70b-8192';
 
 // عناصر الصفحة
 const chatBox = document.getElementById('chatBox');
