@@ -119,3 +119,24 @@ userInput.addEventListener('input', function() {
     this.style.height = 'auto';
     this.style.height = Math.min(this.scrollHeight, 100) + 'px';
 });
+
+// ========================================
+// إظهار وإخفاء القائمة للجوال
+// ========================================
+const menuToggle = document.getElementById('menuToggle');
+const sidebar = document.getElementById('sidebar');
+
+if (menuToggle) {
+    menuToggle.addEventListener('click', () => {
+        sidebar.classList.toggle('open');
+    });
+}
+
+// إغلاق القائمة عند الضغط على أي خيار (للهواتف)
+document.querySelectorAll('.model-option, #clearChat').forEach(el => {
+    el.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+            sidebar.classList.remove('open');
+        }
+    });
+});
